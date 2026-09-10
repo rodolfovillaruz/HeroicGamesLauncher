@@ -17,11 +17,14 @@ jobs:
       - uses: ./.github/actions/install-deps
       # Publish to whichever repo the workflow runs in (upstream or a fork),
       # instead of the hardcoded target in package.json's "repository" field.
+      # releaseType=release publishes immediately; electron-builder otherwise
+      # defaults to a draft that has to be published by hand.
       - run: >-
           pnpm release:linux
           -c.publish.provider=github
           -c.publish.owner=${{ github.repository_owner }}
           -c.publish.repo=${{ github.event.repository.name }}
+          -c.publish.releaseType=release
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
