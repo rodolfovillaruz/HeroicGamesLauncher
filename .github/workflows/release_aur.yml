@@ -8,6 +8,8 @@ on:
 
 jobs:
   update-aur:
+    # Only the upstream repo publishes to the AUR.
+    if: github.repository == 'Heroic-Games-Launcher/HeroicGamesLauncher'
     runs-on: ubuntu-latest
 
     container:

@@ -25,6 +25,8 @@ env:
 
 jobs:
   draft-releases:
+    # Only the upstream repo publishes to Flathub.
+    if: github.repository == 'Heroic-Games-Launcher/HeroicGamesLauncher'
     runs-on: ubuntu-latest
     steps:
       - name: echo ref name.

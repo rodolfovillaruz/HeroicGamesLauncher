@@ -15,7 +15,13 @@ jobs:
           sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm
       - uses: actions/checkout@v6
       - uses: ./.github/actions/install-deps
-      - run: pnpm release:linux
+      # Publish to whichever repo the workflow runs in (upstream or a fork),
+      # instead of the hardcoded target in package.json's "repository" field.
+      - run: >-
+          pnpm release:linux
+          -c.publish.provider=github
+          -c.publish.owner=${{ github.repository_owner }}
+          -c.publish.repo=${{ github.event.repository.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}

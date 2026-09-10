@@ -7,6 +7,8 @@ on:
 
 jobs:
   update_version_job:
+    # Only relevant on the upstream repo's bug report template.
+    if: github.repository == 'Heroic-Games-Launcher/HeroicGamesLauncher'
     runs-on: ubuntu-latest
 
     steps:

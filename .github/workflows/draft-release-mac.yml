@@ -20,6 +20,9 @@ env:
 
 jobs:
   draft-releases:
+    # Only run on the upstream repo. Forks lack the Apple code-signing and
+    # castlabs EVS secrets this job needs, so it is skipped there.
+    if: github.repository == 'Heroic-Games-Launcher/HeroicGamesLauncher'
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v6
